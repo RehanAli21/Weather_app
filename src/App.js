@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import AppUI from './AppUI'
+import SideNavbar from './SideNavbar'
+import axios from 'axios'
 
 const App = () => {
 	const [latitude, setLatitude] = useState(260.1)
 	const [longitude, setLongitude] = useState(260.1)
+	const [res, setRes] = useState()
+	const [show, setShow] = useState(false)
+
+	const showNav = () => setShow(!show)
 
 	const location = () => {
 		if (navigator.geolocation) {
@@ -22,19 +27,34 @@ const App = () => {
 			.get(
 				`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
 			)
-			.then(res => console.log(res))
+			.then(res => setRes(res.data))
 			.catch(err => console.error(err))
 	}
 
 	useEffect(() => {
-		location()
+		location(setLatitude, setLongitude)
 		if (longitude !== 260.1 && latitude !== 260.1) {
-			alert('changes')
-			getWeatherData()
+			getWeatherData(latitude, longitude)
 		}
 	}, [longitude, latitude])
 
-	return <AppUI />
+	const showApp = () => {
+		if (res) {
+			return <AppUI data={res} />
+		} else {
+			return <h1>Loading, Wait..</h1>
+		}
+	}
+
+	return (
+		<div className='app'>
+			<button onClick={showNav} className='nav-btn'>
+				&#9776;
+			</button>
+			<SideNavbar show={show} />
+			{showApp()}
+		</div>
+	)
 }
 
 export default App
