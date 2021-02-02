@@ -1,0 +1,33 @@
+body {
+	background-color: #333333;
+	color: white;
+	font-family: sans-serif;
+}
+.app {
+	text-align: center;
+	display: grid;
+	grid-template-rows: 15% 1.5fr 1fr 5%;
+	height: 90vh;
+	width: 50%;
+	margin-top: 5vh;
+	margin-left: 25%;
+}
+.main {
+	grid-row: 2/3;
+	display: grid;
+	grid-template-columns: 5% 1fr 2fr 5%;
+	width: 100%;
+}
+.main-one {
+	grid-column: 2/3;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	width: 100%;
+	margin-top: 20px;
+}
+.extra {
+	grid-row: 3/4;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	width: 100%;
+}

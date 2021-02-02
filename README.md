@@ -1,2 +1,3 @@
 # weather_app
-Simple weather application.
+
+Weather application.
