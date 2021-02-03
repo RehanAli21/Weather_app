@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 body {
 	background-color: #333333;
 	color: white;
@@ -30,4 +33,92 @@ body {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	width: 100%;
+}
+
+.nav-btn {
+	color: white;
+	background-color: transparent;
+	border: 2px solid white;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	font-size: 1.6em;
+	font-weight: bolder;
+	position: absolute;
+	right: 10vw;
+	z-index: 2;
+	outline: none;
+}
+.nav-btn:active {
+	background-color: white;
+	color: #333333;
+}
+
+.side-nav {
+	position: fixed;
+	right: 0px;
+	width: 40%;
+	height: 100vh;
+	margin-right: 0px;
+	display: grid;
+	grid-template-rows: 2fr 1fr 1fr 1fr 1fr 2fr;
+	padding: 10vh 5%;
+	background-color: #333333;
+	border-left: 2px solid white;
+	transition-duration: 0.5s;
+	transform-origin: right;
+}
+
+.side-nav input {
+	padding: 10px 15px;
+	color: white;
+	border: 1px solid white;
+	outline: none;
+	font-size: 1em;
+	margin: auto 0px;
+	background-color: #333333;
+	border-radius: 5px;
+	width: 100%;
+}
+.side-nav input:focus {
+	border-bottom: 2px solid white;
+}
+
+.side-nav .btn {
+	background-color: white;
+	color: #333333;
+	font-weight: bold;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	width: 50%;
+	margin: auto 0px;
+	margin-left: 25%;
+	outline: none;
+}
+
+.side-nav .btn:focus {
+	border: 2px solid #333333;
+}
+
+.side-nav .btn:active {
+	transform: scale(0.9);
+}
+
+@media only screen and (max-width: 768px) {
+	.app {
+		margin-left: 20%;
+	}
+	.side-nav {
+		width: 70%;
+	}
+}
+
+@media only screen and (max-width: 630px) {
+	.app {
+		margin-left: 0px;
+	}
+	.side-nav {
+		width: 100%;
+	}
 }
