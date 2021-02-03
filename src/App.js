@@ -19,10 +19,7 @@ const App = () => {
 					setLatitude(position.coords.latitude)
 					setLongitude(position.coords.longitude)
 				},
-				error => {
-					setLoadingErrorCode(error.code)
-					console.log(error)
-				}
+				error => setLoadingErrorCode(error.code)
 			)
 		} else {
 			alert('Geolocation is not supported by this browser.')
