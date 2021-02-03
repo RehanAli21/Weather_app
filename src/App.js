@@ -31,7 +31,13 @@ const App = () => {
 			.get(
 				`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
 			)
-			.then(res => setRes(res.data))
+			.then(res => {
+				if (res.data.cod === 200) {
+					setRes(res.data)
+				} else {
+					setLoadingErrorCode(3)
+				}
+			})
 			.catch(err => console.error(err))
 	}
 
@@ -55,6 +61,8 @@ const App = () => {
 							? 'User denied the request for location.'
 							: loadingErrorCode === 2
 							? 'Location information is unavailable.'
+							: loadingErrorCode === 3
+							? 'Unknown Error, try refreashing'
 							: 'Unknown Error, try refreashing'}
 					</h1>
 					<h2 style={{ marginTop: '10%' }}>
@@ -64,6 +72,8 @@ const App = () => {
 							? 'Please Allow location. then refresh page.'
 							: loadingErrorCode === 2
 							? 'Your location is unavailable. Try search your city from side bar'
+							: loadingErrorCode === 3
+							? 'Try search your city from side bar'
 							: 'Try search your city from side bar'}
 					</h2>
 				</div>
