@@ -12,7 +12,11 @@ const SideNavbar = ({ show, getWeatherData, setCity, setCountry }) => {
 		<div
 			className='side-nav'
 			style={{ transform: `scaleX(${show ? 1 : 0})` }}>
-			<h3>Search weather by city name and country name</h3>
+			<div></div>
+			<h3>
+				Search weather by city name or
+				<br /> either city and country name
+			</h3>
 			<input
 				type='text'
 				name='cityName'
