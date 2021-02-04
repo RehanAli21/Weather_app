@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import AppUI from './AppUI'
 import SideNavbar from './SideNavbar'
 import axios from 'axios'
+import name from './name'
 
 const App = () => {
 	const [latitude, setLatitude] = useState(260.1)
@@ -57,7 +58,13 @@ const App = () => {
 		setLoadingErrorCode(0)
 
 		if (city !== '' && country !== '') {
-			getWeatherByCityCountry()
+			if (name[country.toLowerCase()]) {
+				getWeatherByCityCountry(city, name[country.toLowerCase()])
+			} else {
+				alert(
+					'Country name is not matching to this app names list. Search city without country name.'
+				)
+			}
 		} else if (city === '' && country !== '') {
 			alert('Please Fill city field!')
 		} else if (city !== '') {
@@ -80,7 +87,7 @@ const App = () => {
 			.catch(err => console.error(err))
 	}
 
-	const getWeatherByCityCountry = () => {
+	const getWeatherByCityCountry = (city, country) => {
 		axios
 			.get(
 				`http://api.openweathermap.org/data/2.5/weather?q=${city},'',${country}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
