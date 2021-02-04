@@ -9,6 +9,8 @@ const App = () => {
 	const [res, setRes] = useState()
 	const [show, setShow] = useState(false)
 	const [loadingErrorCode, setLoadingErrorCode] = useState(0)
+	const [city, setCity] = useState('')
+	const [country, setCountry] = useState('')
 
 	const showNav = () => setShow(!show)
 
@@ -38,7 +40,10 @@ const App = () => {
 					setLoadingErrorCode(3)
 				}
 			})
-			.catch(err => console.error(err))
+			.catch(err => {
+				alert('error')
+				setLoadingErrorCode(3)
+			})
 	}
 
 	useEffect(() => {
@@ -48,6 +53,48 @@ const App = () => {
 		}
 	}, [longitude, latitude])
 
+	const getWeatherData = () => {
+		setLoadingErrorCode(0)
+
+		if (city !== '' && country !== '') {
+			getWeatherByCityCountry()
+		} else if (city === '' && country !== '') {
+			alert('Please Fill city field!')
+		} else if (city !== '') {
+			getWeatherByCity()
+		}
+	}
+
+	const getWeatherByCity = () => {
+		axios
+			.get(
+				`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
+			)
+			.then(res => {
+				if (res.data.cod === 200) {
+					setRes(res.data)
+				} else {
+					setLoadingErrorCode(3)
+				}
+			})
+			.catch(err => console.error(err))
+	}
+
+	const getWeatherByCityCountry = () => {
+		axios
+			.get(
+				`http://api.openweathermap.org/data/2.5/weather?q=${city},'',${country}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
+			)
+			.then(res => {
+				if (res.data.cod === 200) {
+					setRes(res.data)
+				} else {
+					setLoadingErrorCode(3)
+				}
+			})
+			.catch(err => console.error(err))
+	}
+
 	const showApp = () => {
 		if (res) {
 			return <AppUI data={res} />
@@ -56,7 +103,7 @@ const App = () => {
 				<div>
 					<h1 style={{ marginTop: '25vh' }}>
 						{loadingErrorCode === 0
-							? 'Loading, Please wait..'
+							? 'Loading, Please wait...'
 							: loadingErrorCode === 1
 							? 'User denied the request for location.'
 							: loadingErrorCode === 2
@@ -86,7 +133,12 @@ const App = () => {
 			<button onClick={showNav} className='nav-btn'>
 				&#9776;
 			</button>
-			<SideNavbar show={show} />
+			<SideNavbar
+				show={show}
+				getWeatherData={getWeatherData}
+				setCity={setCity}
+				setCountry={setCountry}
+			/>
 			{showApp()}
 		</div>
 	)
