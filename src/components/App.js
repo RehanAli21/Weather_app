@@ -32,7 +32,7 @@ const App = () => {
 	const getWeatherDataByLatitudeLongitude = () => {
 		axios
 			.get(
-				`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
+				`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
 			)
 			.then(res => {
 				if (res.data.cod === 200) {
@@ -75,7 +75,7 @@ const App = () => {
 	const getWeatherByCity = () => {
 		axios
 			.get(
-				`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
+				`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
 			)
 			.then(res => {
 				if (res.data.cod === 200) {
@@ -92,7 +92,7 @@ const App = () => {
 	const getWeatherByCityCountry = (city, country) => {
 		axios
 			.get(
-				`http://api.openweathermap.org/data/2.5/weather?q=${city},'',${country}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
+				`https://api.openweathermap.org/data/2.5/weather?q=${city},'',${country}&appid=272621386d2b0b9953a5efa44597d57e&units=metric`
 			)
 			.then(res => {
 				if (res.data.cod === 200) {

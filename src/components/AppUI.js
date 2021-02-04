@@ -27,7 +27,7 @@ const AppUI = ({ data }) => {
 				<div>
 					<img
 						alt='icon'
-						src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`}
+						src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`}
 					/>
 				</div>
 			</div>
