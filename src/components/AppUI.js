@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const AppUI = ({ data }) => {
 	const toCapitalize = string =>
@@ -6,14 +6,16 @@ const AppUI = ({ data }) => {
 
 	return (
 		<React.Fragment>
-			<h1>
+			<h1 className='name'>
 				{data.name}, {data.sys.country} Weather
 			</h1>
 			<div className='main'>
 				<div className='main-one'>
 					<img
 						alt='icon'
-						src='https://img.icons8.com/windows/128/ffffff/temperature-low.png'
+						src={`https://img.icons8.com/windows/${
+							window.screen.width < 600 ? '100' : '128'
+						}/ffffff/temperature-low.png`}
 					/>
 					<div>
 						<h1>
@@ -33,7 +35,9 @@ const AppUI = ({ data }) => {
 				<div>
 					<img
 						alt='icon'
-						src='https://img.icons8.com/carbon-copy/45/ffffff/water.png'
+						src={`https://img.icons8.com/carbon-copy/${
+							window.screen.width < 600 ? '38' : '45'
+						}/ffffff/water.png`}
 					/>
 					<p>{data.main.humidity}%</p>
 					<h4>Humidity</h4>
@@ -41,7 +45,9 @@ const AppUI = ({ data }) => {
 				<div>
 					<img
 						alt='icon'
-						src='https://img.icons8.com/windows/45/ffffff/barometer-gauge.png'
+						src={`https://img.icons8.com/windows/${
+							window.screen.width < 600 ? '38' : '45'
+						}/ffffff/barometer-gauge.png`}
 					/>
 					<p>{data.main.pressure} mb</p>
 					<h4>Pressure</h4>
@@ -49,7 +55,9 @@ const AppUI = ({ data }) => {
 				<div>
 					<img
 						alt='icon'
-						src='https://img.icons8.com/pastel-glyph/45/ffffff/wind--v1.png'
+						src={`https://img.icons8.com/pastel-glyph/${
+							window.screen.width < 600 ? '38' : '45'
+						}/ffffff/wind--v1.png`}
 					/>
 					<p>{data.wind.speed}</p>
 					<h4>Wind Speed</h4>
@@ -57,7 +65,9 @@ const AppUI = ({ data }) => {
 				<div>
 					<img
 						alt='icon'
-						src='https://img.icons8.com/metro/45/ffffff/visible.png'
+						src={`https://img.icons8.com/metro/${
+							window.screen.width < 600 ? '38' : '45'
+						}/ffffff/visible.png`}
 					/>
 					<p>{data.visibility / 1000} km</p>
 					<h4>Visibility</h4>

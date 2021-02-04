@@ -81,10 +81,11 @@ const App = () => {
 				if (res.data.cod === 200) {
 					setRes(res.data)
 				} else {
+					alert('city name not found.')
 					setLoadingErrorCode(3)
 				}
 			})
-			.catch(err => console.error(err))
+			.catch(err => alert('This city is not present in our Data.'))
 	}
 
 	const getWeatherByCityCountry = (city, country) => {
@@ -96,10 +97,13 @@ const App = () => {
 				if (res.data.cod === 200) {
 					setRes(res.data)
 				} else {
+					alert('city and country name not found.')
 					setLoadingErrorCode(3)
 				}
 			})
-			.catch(err => console.error(err))
+			.catch(err =>
+				alert('This city and country is not present in our Data.')
+			)
 	}
 
 	const showApp = () => {
@@ -123,13 +127,14 @@ const App = () => {
 						{loadingErrorCode === 0
 							? ''
 							: loadingErrorCode === 1
-							? 'Please Allow location. then refresh page.'
+							? 'Please Allow location. then refresh page. or you can search your city from side bar'
 							: loadingErrorCode === 2
 							? 'Your location is unavailable. Try search your city from side bar'
 							: loadingErrorCode === 3
 							? 'Try search your city from side bar'
 							: 'Try search your city from side bar'}
 					</h2>
+					<p>Note: For side bar click button on the right side.</p>
 				</div>
 			)
 		}

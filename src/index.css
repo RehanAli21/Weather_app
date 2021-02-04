@@ -18,7 +18,7 @@ body {
 .main {
 	grid-row: 2/3;
 	display: grid;
-	grid-template-columns: 5% 1fr 2fr 5%;
+	grid-template-columns: 5% 1fr 1.5fr 5%;
 	width: 100%;
 }
 .main-one {
@@ -26,7 +26,7 @@ body {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 40px;
 }
 .extra {
 	grid-row: 3/4;
@@ -107,7 +107,8 @@ body {
 
 @media only screen and (max-width: 768px) {
 	.app {
-		margin-left: 20%;
+		margin-left: 10%;
+		width: 80%;
 	}
 	.side-nav {
 		width: 70%;
@@ -117,8 +118,25 @@ body {
 @media only screen and (max-width: 630px) {
 	.app {
 		margin-left: 0px;
+		width: 100%;
+		grid-template-rows: 15% 1fr 1.2fr 5%;
+	}
+	.nav-btn {
+		margin-top: -10px;
+		width: 36px;
+		height: 36px;
+		font-size: 1.1em;
+	}
+	.name {
+		margin-top: 40px;
+	}
+	.main h1 {
+		font-size: 1em;
 	}
 	.side-nav {
 		width: 100%;
+	}
+	.extra h4 {
+		font-size: 0.9em;
 	}
 }
