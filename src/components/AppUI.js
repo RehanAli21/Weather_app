@@ -1,9 +1,12 @@
 import React from 'react'
 
 const AppUI = ({ data }) => {
+	//For capitalize string
 	const toCapitalize = string =>
 		string.charAt(0).toUpperCase() + string.slice(1)
 
+	//In the images src if screen width is less then 600,
+	//then images for app should be small.
 	return (
 		<React.Fragment>
 			<h1 className='name'>

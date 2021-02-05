@@ -2,19 +2,24 @@ import React, { useState, useEffect } from 'react'
 import AppUI from './AppUI'
 import SideNavbar from './SideNavbar'
 import axios from 'axios'
-import name from './name'
+import name from './name' //for getting country name ISO-31600 codes
 
 const App = () => {
 	const [latitude, setLatitude] = useState(260.1)
 	const [longitude, setLongitude] = useState(260.1)
-	const [res, setRes] = useState()
-	const [show, setShow] = useState(false)
-	const [loadingErrorCode, setLoadingErrorCode] = useState(0)
+	const [res, setRes] = useState() //for response from API
+	const [show, setShow] = useState(false) //for side bar
+	const [loadingErrorCode, setLoadingErrorCode] = useState(0) //for loading msgs
 	const [city, setCity] = useState('')
 	const [country, setCountry] = useState('')
 
+	//This changes the show state, because
+	//it controls the wheather side bar is
+	//visible or nor
 	const showNav = () => setShow(!show)
 
+	//This function is used for getting latitude and
+	//longitude of user from browser.
 	const location = () => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
@@ -29,6 +34,8 @@ const App = () => {
 		}
 	}
 
+	//This function is used for getting data from
+	//OpenWeatherMap by Users latitude and longitude
 	const getWeatherDataByLatitudeLongitude = () => {
 		axios
 			.get(
@@ -47,6 +54,8 @@ const App = () => {
 			})
 	}
 
+	//For getting longitude and latitude, and
+	//then getting data from API, when app starts.
 	useEffect(() => {
 		location(setLatitude, setLongitude)
 		if (longitude !== 260.1 && latitude !== 260.1) {
@@ -54,10 +63,15 @@ const App = () => {
 		}
 	}, [longitude, latitude])
 
+	//For checking that wheather API request
+	//should be of city or (city and country)
+	//and also for validating
 	const getWeatherData = () => {
 		setLoadingErrorCode(0)
 
+		//checking if city and country both are given
 		if (city !== '' && country !== '') {
+			//checking if name file contain input country name
 			if (name[country.toLowerCase()]) {
 				getWeatherByCityCountry(city, name[country.toLowerCase()])
 			} else {
@@ -65,13 +79,20 @@ const App = () => {
 					'Country name is not matching to this app names list. Search city without country name.'
 				)
 			}
-		} else if (city === '' && country !== '') {
+		}
+		//checking if country is given and city is not,
+		//because API will not give data without city.
+		else if (city === '' && country !== '') {
 			alert('Please Fill city field!')
-		} else if (city !== '') {
+		}
+		//checking if only city is given.
+		else if (city !== '') {
 			getWeatherByCity()
 		}
 	}
 
+	//This function is used for getting data from
+	//OpenWeatherMap by city name only
 	const getWeatherByCity = () => {
 		axios
 			.get(
@@ -89,6 +110,8 @@ const App = () => {
 			.catch(err => alert('This city is not present in our Data.'))
 	}
 
+	//This function is used for getting data from
+	//OpenWeatherMap by city and country names
 	const getWeatherByCityCountry = (city, country) => {
 		axios
 			.get(
@@ -108,6 +131,8 @@ const App = () => {
 			)
 	}
 
+	//For showing loading messages and
+	//if there is no error, it will show app.
 	const showApp = () => {
 		if (res) {
 			return <AppUI data={res} />
